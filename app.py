@@ -32,13 +32,18 @@ def selected_row(event):
   e4.set(item['values'][3])
 
 def search_all():
-  pass
+  get_all(q.get())
 
-def get_all():
-  c.execute("""
-  SELECT * FROM data
-  """
-  )
+def get_all(app=""):
+  if app != "":
+    c.execute("""
+    SELECT * FROM data WHERE app=:app
+    """, {'app': app})
+  else:
+    c.execute("""
+    SELECT * FROM data
+    """
+    )
   rows = c.fetchall()
   trv.delete(*trv.get_children())
   for i in rows:
@@ -122,9 +127,6 @@ ent.pack(side=tk.LEFT, padx=6)
 
 btn = tk.Button(wrapper2, text="Search", command=search_all)
 btn.pack(side=tk.LEFT, padx=6)
-
-cbtn = tk.Button(wrapper2, text="Clear", command=get_all)
-cbtn.pack(side=tk.LEFT, padx=6)
 
 # Update: Wrapper 3
 e1 = StringVar()
