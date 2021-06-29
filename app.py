@@ -10,15 +10,15 @@ conn = sqlite3.connect("pyvault.db")
 # conn = sqlite3.connect(":memory:")
 c = conn.cursor()
 CREATE_TBL = """
-CREATE TABLE data (
+CREATE TABLE IF NOT EXISTS data (
   app varchar(100),
   username varchar(50),
   password varchar(20),
   details varchar(200)
 )
 """
-# c.execute(CREATE_TBL)
-# conn.commit()
+c.execute(CREATE_TBL)
+conn.commit()
 
 
 def selected_row(event):
