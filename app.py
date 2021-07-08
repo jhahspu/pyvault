@@ -20,6 +20,13 @@ CREATE TABLE IF NOT EXISTS data (
 c.execute(CREATE_TBL)
 conn.commit()
 
+def clear_inputs():
+  e1.set('')
+  e2.set('')
+  e3.set('')
+  e4.set('')
+  q.set('')
+
 
 def selected_row(event):
   print("[double clicked a row] ")
@@ -33,6 +40,7 @@ def selected_row(event):
 
 def search_all():
   get_all(q.get())
+  clear_inputs()
 
 def get_all(app=""):
   if app != "":
@@ -48,6 +56,7 @@ def get_all(app=""):
   trv.delete(*trv.get_children())
   for i in rows:
     trv.insert('', 'end', values=i)
+  clear_inputs()
 
 def app_add():
   with conn:
